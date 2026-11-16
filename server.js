@@ -152,6 +152,13 @@ let results = await collection.find({}).toArray();
 response.send(results);
 });
 
+app.post("/orders", async function(request, response) {
+let body = request.body;
+let collection = await db.collection("orders");
+let result = await collection.insertOne(body);
+response.send(result);
+});
+
 app.listen(3000, function() {
 console.log("App started on port 3000");
 });
