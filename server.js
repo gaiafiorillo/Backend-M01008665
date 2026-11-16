@@ -140,10 +140,10 @@ var app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use(function(request, response) { //middleware
+app.use(function(request, response, next) { //middleware
 
-console.log("In comes a request to: " + request.url);
-response.json(lessonArray);
+console.log("In comes a " + request.method + " request to: " + request.url);
+next();
 });
 
 app.listen(3000, function() {
