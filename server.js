@@ -146,6 +146,12 @@ console.log("In comes a " + request.method + " request to: " + request.url);
 next();
 });
 
+app.get("/lessons", async function(request, response) {
+let collection = await db.collection("lessons");
+let results = await collection.find({}).toArray();
+response.send(results);
+});
+
 app.listen(3000, function() {
 console.log("App started on port 3000");
 });
