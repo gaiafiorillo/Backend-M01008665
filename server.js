@@ -1,5 +1,6 @@
 var express = require("express"); //Requires the Express module
 var cors = require("cors");
+var path = require("path");
 require("dotenv").config({ path: "./config.env" });
 const { MongoClient, ObjectId } = require("mongodb");
 const uri = process.env.MONGODB_PREFIX + process.env.MONGODB_USERNAME + ":" +
@@ -144,6 +145,12 @@ app.use(function(request, response, next) { //middleware
 
 console.log("In comes a " + request.method + " request to: " + request.url);
 next();
+});
+
+app.use("/images", express.static(path.join(__dirname, "images")));
+
+app.use("/images", function(request, response) {
+response.status(404).send("Image not found: " + request.url);
 });
 
 app.get("/lessons", async function(request, response) {
