@@ -159,6 +159,20 @@ let result = await collection.insertOne(body);
 response.send(result);
 });
 
+app.put("/lessons/:_id", async function(request, response) {
+var body = request.body;
+let collection = await db.collection("lessons");
+let tempid = request.params._id;
+
+const query = { _id: new ObjectId(tempid) };
+const updates = {
+$set: request.body
+};
+let result = await collection.updateOne(query, updates);
+response.send(result);
+console.log(result);
+});
+
 app.listen(3000, function() {
 console.log("App started on port 3000");
 });
