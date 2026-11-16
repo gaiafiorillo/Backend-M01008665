@@ -10,6 +10,7 @@ const db = client.db("Afterschoolclub");
 
 // Calls the express function to start a new Express application
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -53,6 +54,6 @@ response.send(result);
 console.log(result);
 });
 
-app.listen(3000, function() {
-console.log("App started on port 3000");
+app.listen(port, function() {
+console.log("App started on port " + port);
 });
